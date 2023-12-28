@@ -3,7 +3,9 @@ let h2 = document.querySelector("h2");
 let resetBtn = document.querySelector(".reset");
 
 let turnO = true;
-h2.innerHTML = "O Turn"
+h2.innerHTML = "O Turn";
+let turnCount = 0;
+
 let winCases = [
     [0, 1, 2],
     [3, 4, 5],
@@ -22,12 +24,18 @@ function checkWin() {
         let val3 = cases[2];
 
         if((boxes[val1].innerHTML === boxes[val2].innerHTML && boxes[val2].innerHTML === boxes[val3].innerHTML) && 
-            (boxes[val1].innerHTML != "" && boxes[val2].innerHTML != "" && boxes[val3] != "")) {
+            (boxes[val1].innerHTML != "" && boxes[val2].innerHTML != "" && boxes[val3].innerHTML != "")) {
                 boxes.forEach((box)=>{
                     box.disabled = true;
                 })
                 h2.innerHTML = `${boxes[val1].innerHTML} Wins !!!`;
                 resetBtn.innerHTML = "Play again";
+        }
+        else{
+            if(turnCount >= 9){
+                h2.innerHTML = "Tie";
+                resetBtn.innerHTML = "Play again";
+            }
         }
     })
 }
@@ -44,6 +52,7 @@ boxes.forEach((elem) => {
             elem.innerHTML = "X";
             turnO = true;
         }
+        turnCount++;
         checkWin();
         elem.disabled = true;
     })
@@ -56,6 +65,7 @@ function resetGame(){
         turnO = true;
         h2.innerHTML = `${turnO === true ? "O" : "X"} Turn`;
         resetBtn.innerHTML = "Reset";
+        turnCount = 0;
     })
 }
 
