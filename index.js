@@ -1,5 +1,6 @@
 let boxes = document.querySelectorAll(".box");
 let h2 = document.querySelector("h2");
+let resetBtn = document.querySelector(".reset");
 
 let turnO = true;
 h2.innerHTML = "O Turn"
@@ -26,6 +27,7 @@ function checkWin() {
                     box.disabled = true;
                 })
                 h2.innerHTML = `${boxes[val1].innerHTML} Wins !!!`;
+                resetBtn.innerHTML = "Play again";
         }
     })
 }
@@ -53,6 +55,7 @@ function resetGame(){
         box.disabled = false;
         turnO = true;
         h2.innerHTML = `${turnO === true ? "O" : "X"} Turn`;
+        resetBtn.innerHTML = "Reset";
     })
 }
 
